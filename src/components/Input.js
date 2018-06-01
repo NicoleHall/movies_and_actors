@@ -20,7 +20,7 @@ class Input extends React.Component {
       <form onSubmit={this.handleSubmit}>
         <label>
           Movie Title:
-          <input type="text" value={this.state.value} onChange={this.handleChange}/> <br/>
+          <input type="text" value={this.state.value} onChange={this.handleChange} /> <br/>
         </label>
         <input type="submit" value="Submit To See Actors"/>
       </form>

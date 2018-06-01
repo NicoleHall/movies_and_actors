@@ -41,6 +41,3 @@ class Actors extends React.Component {
   }
 }
 export default Actors
-
-
-//this.formattedMovieTitle = this.props.movie.split(" ").join("+")
