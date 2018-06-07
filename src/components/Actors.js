@@ -12,19 +12,30 @@ class Actors extends React.Component {
     id: ""
   }
 
+  getIdOfMovie = (formattedMovieTitle) => {
+    const url = `https://api.themoviedb.org/3/search/movie?api_key=7773e0e933d9ba79ea13c22378a8839d&query=${this.formattedMovieTitle}`
+    fetch(url).then(response => {
+      //let idOfMovie = response.json()
+      response.json().then(results => {let idOfMovie = results.results[0].id; return idOfMovie})
+      console.log(results)
+      //return idOfMovie;
+    })
+  }
+
   putActorsInArray = (jsonResponse) => jsonResponse.cast.map(obj => obj.name)
 
-  // actorList = this.state.actors.map( actor => <li>{actor}</li>)
+  componentDidMount(){
 
-  async componentDidMount() {
-    const url = `https://api.themoviedb.org/3/search/movie?api_key=7773e0e933d9ba79ea13c22378a8839d&query=${this.formattedMovieTitle}`
 
-    const response = await fetch(url)
-    const json = await response.json()
-    this.setState({id: json.results[1].id}, () => this.getListOfActors(json.results[1].id))
+    // const url = `https://api.themoviedb.org/3/search/movie?api_key=7773e0e933d9ba79ea13c22378a8839d&query=${this.formattedMovieTitle}`
+    //
+    // const response = await fetch(url)
+    // const json = await response.json()
 
-    //this.getListOfActors()
+    this.setState({id: this.getIdOfMovie(this.formattedMovieTitle)})
   }
+
+
 
   async getListOfActors(id) {
     const i = id
@@ -34,6 +45,12 @@ class Actors extends React.Component {
     const json = await response.json()
     this.setState({actors: this.putActorsInArray(json)})
   }
+
+  // componentWillReceiveProps(nextProps){
+  //   console.log(`I am your next movie title ${nextProps.movie}`)
+  //   this.setState("", "")
+  //
+  // }
 
   render(){
     return(
