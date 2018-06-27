@@ -3,7 +3,7 @@ import PromptToEnterMovie from './PromptToEnterMovie'
 import Actors from './Actors'
 
 const Decider = (props) => {
-  if (props.movie == "first movie") {
+  if (props.movie === "first movie") {
     return <PromptToEnterMovie/>
 
   } else {
